@@ -5,16 +5,16 @@ use ieee.numeric_std.all;
 LIBRARY work;
 USE work.common.all;
 
-entity cpu is
+entity SoC is
     port (rst : in  std_logic;
           clk : in  std_logic;
           slide_sw: in bus_8_bit;
           push_btn: in std_logic_vector(3 downto 0);
           ledRed : out std_logic_vector(17 downto 0);
           HEX : OUT bus_7_bit_vector(7 DOWNTO 0));
-end entity cpu;
+end entity SoC;
 
-architecture structure of cpu is
+architecture structure of SoC is
 
 CONSTANT three2one_datawidth : integer := 16;
 CONSTANT two2one_datawidth   : integer := 8;
@@ -176,7 +176,7 @@ port map(selector => instr(2 downto 0),
 --ledRed(7 downto 0) <= MEM_ad;
 --ledRed(15 downto 8) <= MEM_out(7 downto 0);
 --ledRed(17) <= Ms;
-ledRed(7 downto 0) <= ALUr(7 downto 0);
-ledRed(17 downto 16) <= ALUs;
+--ledRed(7 downto 0) <= ALUr(7 downto 0);
+--ledRed(17 downto 16) <= ALUs;
 
 end architecture structure;
