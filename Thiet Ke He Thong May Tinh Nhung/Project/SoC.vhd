@@ -6,10 +6,10 @@ LIBRARY work;
 USE work.common.all;
 
 entity SoC is
-	port (rst : std_logic;
-		  clk : std_logic;
+    port (rst : std_logic;
+          clk : std_logic;
 
-		  slide_sw: in  bus_8_bit;
+          slide_sw: in  bus_8_bit;
           push_btn: in  std_logic_vector(3 downto 0);
 
           HEX : out bus_7_bit_vector(7 DOWNTO 0));
@@ -20,35 +20,35 @@ architecture structure of SoC is
 
 SIGNAL instr_out : bus_16_bit;
 
-SIGNAL ROM_ad  	 : unsigned(7 downto 0);
+SIGNAL ROM_ad    : unsigned(7 downto 0);
 SIGNAL ROM_out   : bus_16_bit;
 
-SIGNAL OPR1 	 : bus_16_bit;
+SIGNAL OPR1      : bus_16_bit;
 
-SIGNAL Ms     	 : std_logic;
-SIGNAL Mre   	 : std_logic;
-SIGNAL Mwe   	 : std_logic;
-SIGNAL RAM_ad  	 : bus_8_bit;
+SIGNAL Ms        : std_logic;
+SIGNAL Mre       : std_logic;
+SIGNAL Mwe       : std_logic;
+SIGNAL RAM_ad    : bus_8_bit;
 SIGNAL RAM_out   : bus_16_bit;
 
-SIGNAL HEX_en 	 : std_logic;
+SIGNAL HEX_en    : std_logic;
 
 begin
 
 CPU: entity work.CPU(structure)
 port map(rst => rst,
-	     clk => clk,
+         clk => clk,
 
-	     slide_sw => slide_sw,
-	     push_btn => push_btn,
+         slide_sw => slide_sw,
+         push_btn => push_btn,
 
-	     ROM_ad  => ROM_ad,
-	     ROM_out => ROM_out,
+         ROM_ad  => ROM_ad,
+         ROM_out => ROM_out,
 
          instr_out => instr_out,
 
-         Mre 	 => Mre,
-         Mwe 	 => Mwe,
+         Mre     => Mre,
+         Mwe     => Mwe,
          RAM_ad  => RAM_ad,
          RAM_out => RAM_out,
 
@@ -58,13 +58,13 @@ port map(rst => rst,
 
 Memory: entity work.Memory(structure)
 port map(ROM_ad  => ROM_ad,
-		 ROM_out => ROM_out,
+         ROM_out => ROM_out,
 
-		 clk 		=> clk,
-		 Mre 		=> Mre,
-         Mwe 		=> Mwe,
-         RAM_ad 	=> RAM_ad,
-         RAM_out 	=> RAM_out,
+         clk        => clk,
+         Mre        => Mre,
+         Mwe        => Mwe,
+         RAM_ad     => RAM_ad,
+         RAM_out    => RAM_out,
          RAM_datain => OPR1);
 
 seven_seg: entity work.seven_segment_controller(behavior)
