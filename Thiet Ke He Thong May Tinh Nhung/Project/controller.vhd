@@ -29,8 +29,6 @@ entity controller is
           ALUn  : in std_logic;
           delay_en: out std_logic;
           time_out: in std_logic;
-          --cur_db: out state_t;
-          --next_db: out state_t;
           HEX_en : out std_logic
           );
 end entity controller;
@@ -57,9 +55,7 @@ begin
     begin
         case current_state is
             when IDLE =>
-                --if rising_edge(rst) then
                     next_state <= FETCH;
-                --end if;
 
             when INCREASE =>
                 next_state <= FETCH;
@@ -138,27 +134,4 @@ begin
     delay_en <= '1' when current_state = CMD11 else '0';
     HEX_en <= '1' when current_state = CMD12 else '0';
 
-    --alu_p: process(current_state)
-    --begin
-    --    case current_state is
-    --        when CMD5 => ALUs <= "00";
-    --        when CMD6 => ALUs <= "01";
-    --        when CMD7 => ALUs <= "10";
-    --        when CMD8 => ALUs <= "11";
-    --        when others => null;
-    --    end case;
-    --end process alu_p;
-
-    --RFs_p: process(current_state)
-    --begin
-    --    case current_state is
-    --        when CMD0 | CMD3 => RFs <= "10";
-    --        when CMD4 => RFs <= "01";
-    --        when CMD5 | CMD6 | CMD7 | CMD8 => RFs <= "00";
-    --        when others => null;
-    --    end case;
-    --end process RFs_p;
-
-    --next_db <= next_state;
-    --cur_db <= current_state;
 end architecture behavior;
