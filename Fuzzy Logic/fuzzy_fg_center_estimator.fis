@@ -1,0 +1,30 @@
+[System]
+Name='fuzzy_fg_center_estimator'
+Type='mamdani'
+Version=2.0
+NumInputs=1
+NumOutputs=1
+NumRules=2
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='rate'
+Range=[0 10]
+NumMFs=2
+MF1='SMALL':'gaussmf',[2.20622931833571 0.0405]
+MF2='BIG':'trapmf',[8.55273131094258 9.17113131094258 20.5757313109426 20.6757313109426]
+
+[Output1]
+Name='FG_center'
+Range=[0 255]
+NumMFs=2
+MF1='MID':'gbellmf',[21 3.13 88.5654604550379]
+MF2='HIGH':'sigmf',[0.0539 201.789815817985]
+
+[Rules]
+2, 1 (1) : 1
+1, 2 (1) : 1
